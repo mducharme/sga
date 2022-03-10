@@ -13,13 +13,10 @@ namespace Game
         public const string QUICKSAVE_NAME = "Quicksave";
 
 
-        private Player.PlayerController player;
-
         private string saveDir;
 
-        private void Start()
+        private void Awake()
         {
-            player = Player.PlayerController.instance;
             saveDir = Application.persistentDataPath + SAVEFILE_FOLDER;
         }
 
@@ -40,7 +37,6 @@ namespace Game
             string json = JsonUtility.ToJson(PrepareSaveData(), true);
 
             string fileName = saveDir + gameId + "." + SAVEFILE_EXT;
-            Debug.Log(fileName);
             FileInfo file = new(fileName);
             file.Directory.Create(); // Ensure dir exists
             File.WriteAllText(fileName, json);
@@ -71,7 +67,7 @@ namespace Game
         {
             SaveData data = new();
             data.scene = SceneManager.GetActiveScene().name;
-            data.player = (Player.PlayerController.SaveData)player.PrepareSaveData();
+            data.player = (Player.PlayerController.SaveData)Player.PlayerController.instance.PrepareSaveData();
             return data;
         }
 
@@ -82,7 +78,7 @@ namespace Game
             {
                 SceneManager.LoadScene(saveData.scene);
             }
-            player.RestoreSaveData(saveData.player);
+            Player.PlayerController.instance.RestoreSaveData(saveData.player);
         }
 
     }

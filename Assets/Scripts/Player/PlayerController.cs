@@ -2,12 +2,13 @@ using UnityEngine;
 
 namespace Player
 {
+    [RequireComponent(typeof(GameLog))]
     [RequireComponent(typeof(TopDownMovement))]
     public class PlayerController : MonoBehaviour, Game.ISaveable
     {
         static public PlayerController instance;
 
-        [SerializeField] private GameLog gameLog;
+        private GameLog gameLog;
 
         private TopDownMovement topDownMovement;
 
@@ -26,6 +27,9 @@ namespace Player
 
             topDownMovement.onMove += OnMove;
             topDownMovement.onJump += OnJump;
+
+            gameLog = GetComponent<GameLog>();
+
         }
 
         private void OnDestroy()
@@ -69,6 +73,7 @@ namespace Player
             saveData.position[0] = transform.position.x;
             saveData.position[1] = transform.position.y;
             saveData.position[2] = transform.position.z;
+
             saveData.rotation = new float[4];
             saveData.rotation[0] = transform.rotation.w;
             saveData.rotation[1] = transform.rotation.x;
