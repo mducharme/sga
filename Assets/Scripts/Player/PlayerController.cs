@@ -3,7 +3,7 @@ using UnityEngine;
 namespace Player
 {
     [RequireComponent(typeof(TopDownMovement))]
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : MonoBehaviour, Game.ISaveable
     {
         static public PlayerController instance;
 
@@ -49,5 +49,45 @@ namespace Player
         {
             gameLog.LogJump(jumpNum);
         }
+
+        #region Save
+        [System.Serializable]
+        public struct SaveData
+        {
+            public GameLog.SaveData gameLog;
+
+            public float[] position;
+            public float[] rotation;
+        };
+
+        public object PrepareSaveData()
+        {
+            SaveData saveData = new();
+            saveData.gameLog = (GameLog.SaveData)gameLog.PrepareSaveData();
+
+            saveData.position = new float[3];
+            saveData.position[0] = transform.position.x;
+            saveData.position[1] = transform.position.y;
+            saveData.position[2] = transform.position.z;
+            saveData.rotation = new float[4];
+            saveData.rotation[0] = transform.rotation.w;
+            saveData.rotation[1] = transform.rotation.x;
+            saveData.rotation[2] = transform.rotation.y;
+            saveData.rotation[3] = transform.rotation.z;
+
+            return saveData;
+        }
+
+        public void RestoreSaveData(object save)
+        {
+            SaveData saveData = (SaveData)save;
+
+            gameLog.RestoreSaveData(saveData.gameLog);
+
+            Vector3 pos = new(saveData.position[0], saveData.position[1], saveData.position[2]);
+            Quaternion rot = new(saveData.rotation[0], saveData.rotation[1], saveData.rotation[2], saveData.rotation[3]);
+            transform.SetPositionAndRotation(pos, rot);
+        }
+        #endregion
     }
 }
