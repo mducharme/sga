@@ -7,7 +7,7 @@ namespace Player
     [RequireComponent(typeof(CapsuleCollider))]
     [RequireComponent(typeof(Controls))]
     [RequireComponent(typeof(Rigidbody))]
-    public class Movement : MonoBehaviour
+    public class TopDownMovement : MonoBehaviour
     {
         [Tooltip("Move speed in meters/second")]
         [SerializeField] private float moveSpeed = 10f;
