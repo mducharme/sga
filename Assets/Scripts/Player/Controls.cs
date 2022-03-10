@@ -7,27 +7,36 @@ namespace Player
     [System.Serializable]
     public class Controls : MonoBehaviour
     {
-        public float Horizontal { get; private set; }
-        public float Vertical { get; private set; }
-        public bool IsMoving { get; private set; }
+        [SerializeField] private float horizontal;
+        [SerializeField] private float vertical;
+        [SerializeField] private bool isMoving;
 
-        public bool Jump { get; private set; }
-        public bool IsJumping { get; private set; }
-        public bool StartedJumping { get; private set; }
-        public bool StoppedJumping { get; private set; }
+        [SerializeField] private bool jump;
+        [SerializeField] private bool isJumping;
+        [SerializeField] private bool startedJumping;
+        [SerializeField] private bool stoppedJumping;
+
+        public float Horizontal { get => horizontal; private set { } }
+        public float Vertical { get => vertical; private set { } }
+        public bool IsMoving { get => isMoving; private set { } }
+
+        public bool Jump { get => jump; private set { } }
+        public bool IsJumping { get => isJumping; private set { } }
+        public bool StartedJumping { get => startedJumping; private set { } }
+        public bool StoppedJumping { get => stoppedJumping; private set { } }
 
         public void HandleInput()
         {
-            bool wasJumping = IsJumping;
+            bool wasJumping = isJumping;
 
-            Horizontal = Input.GetAxisRaw("Horizontal");
-            Vertical = Input.GetAxisRaw("Vertical");
-            IsMoving = (Horizontal != 0f || Vertical != 0f);
+            horizontal = Input.GetAxisRaw("Horizontal");
+            vertical = Input.GetAxisRaw("Vertical");
+            isMoving = (horizontal != 0f || vertical != 0f);
 
-            Jump = Input.GetButtonDown("Jump");
-            IsJumping = Input.GetButton("Jump");
-            StartedJumping = !wasJumping && IsJumping;
-            StoppedJumping = wasJumping && !IsJumping;
+            jump = Input.GetButtonDown("Jump");
+            isJumping = Input.GetButton("Jump");
+            startedJumping = !wasJumping && isJumping;
+            stoppedJumping = wasJumping && !isJumping;
         }
     }
 }
