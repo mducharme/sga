@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Player.Log
 {
     [System.Serializable]
-    public class MovementLog
+    public class MovementLog: Game.ISaveable
     {
         [SerializeField] private float distanceTraveled;
         [SerializeField] private int numJumps;
@@ -31,5 +31,33 @@ namespace Player.Log
                 numJumps++;
             }
         }
+
+        #region Save
+        [System.Serializable]
+        public struct SaveData
+        {
+            public float distanceTraveled;
+            public int numJumps;
+            public int numMultiJumps;
+            public int numDash;
+        }
+
+        public object PrepareSaveData()
+        {
+            SaveData saveData = new();
+            saveData.distanceTraveled = distanceTraveled;
+            saveData.numJumps = numJumps;
+            saveData.numMultiJumps = numMultiJumps;
+            return saveData;
+        }
+
+        public void RestoreSaveData(object save)
+        {
+            SaveData saveData = (SaveData)save;
+            distanceTraveled = saveData.distanceTraveled;
+            numJumps = saveData.numJumps;
+            numMultiJumps = saveData.numMultiJumps;
+        }
+        #endregion
     }
 }
