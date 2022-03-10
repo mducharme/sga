@@ -5,12 +5,23 @@ namespace Player
     [RequireComponent(typeof(TopDownMovement))]
     public class PlayerController : MonoBehaviour
     {
+        static public PlayerController instance;
+
         [SerializeField] private GameLog gameLog;
 
         private TopDownMovement topDownMovement;
 
         private void Awake()
         {
+            if (instance != null)
+            {
+                Destroy(this);
+                return;
+            }
+
+            instance = this;
+            DontDestroyOnLoad(this.gameObject);
+
             topDownMovement = GetComponent<TopDownMovement>();
 
             topDownMovement.onMove += OnMove;
