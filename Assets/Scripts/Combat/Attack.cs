@@ -6,6 +6,7 @@ namespace Combat
     public class Attack
     {
         public readonly CombatType type;
+        public readonly Fighter attacker;
 
         public List<Damage> damages = new();
 
@@ -13,9 +14,10 @@ namespace Combat
         public float knockbackForce;
         public float disableDuration;
 
-        public Attack(CombatType type = CombatType.Base)
+        public Attack(CombatType type = CombatType.Base, Fighter attacker=null)
         {
             this.type = type;
+            this.attacker = attacker;
         }
 
         public void AddModifiers(List<AttackModifier> attacks)
