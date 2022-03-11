@@ -33,7 +33,5 @@ namespace Combat
             type = (DamageCategory)System.Enum.Parse(typeof(DamageCategory), saveData.type);
             amount = saveData.amount;
         }
-
-
     }
 }
