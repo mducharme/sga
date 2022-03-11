@@ -16,7 +16,6 @@ namespace Player
         [SerializeField] protected float gravityVelocityThreshold = 1f;
         [SerializeField] protected float gravityModifier = 150f;
 
-        private Controls controls;
         private Rigidbody body;
         private CapsuleCollider groundCollider;
         private bool isGrounded;
@@ -34,26 +33,11 @@ namespace Player
             body.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
 
             groundCollider = GetComponent<CapsuleCollider>();
-            controls = GetComponent<Controls>();
         }
 
-        private void Update()
-        {
-            controls.HandleInput();
-
-            if (controls.Jump)
-            {
-                Jump();
-            }
-        }
-
+   
         private void FixedUpdate()
         {
-            if (controls.IsMoving)
-            {
-                Move();
-            }
-
             CheckGrounded();
 
             if (body.velocity.y <= gravityVelocityThreshold)
@@ -67,9 +51,9 @@ namespace Player
             }
         }
 
-        public void Move()
+        public void Move(Vector3 move)
         {
-            Vector3 movement = moveSpeed * Time.fixedDeltaTime * new Vector3(controls.Horizontal, 0f, controls.Vertical).normalized;
+            Vector3 movement = moveSpeed * Time.fixedDeltaTime * move;
             body.rotation = Quaternion.LookRotation(movement);
             body.position += movement;
             onMove?.Invoke(movement);

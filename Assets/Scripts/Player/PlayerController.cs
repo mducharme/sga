@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace Player
 {
+    [RequireComponent(typeof(Controls))]
     [RequireComponent(typeof(GameLog))]
     [RequireComponent(typeof(TopDownMovement))]
     public class PlayerController : MonoBehaviour, Game.ISaveable
@@ -9,8 +10,14 @@ namespace Player
         static public PlayerController instance;
 
         private GameLog gameLog;
+        private Controls controls;
 
         private TopDownMovement topDownMovement;
+
+        public TopDownMovement Movement { get => topDownMovement; private set { } }
+
+        public delegate void OnInteract();
+        public OnInteract onInteract;
 
         private void Awake()
         {
@@ -29,6 +36,7 @@ namespace Player
             topDownMovement.onJump += OnJump;
 
             gameLog = GetComponent<GameLog>();
+            controls = GetComponent<Controls>();
 
         }
 
@@ -38,6 +46,30 @@ namespace Player
             {
                 topDownMovement.onMove -= OnMove;
                 topDownMovement.onJump -= OnJump;
+            }
+        }
+
+        private void Update()
+        {
+            controls.HandleInput();
+
+            if (controls.Jump)
+            {
+                Movement.Jump();
+            }
+
+            if (controls.Interact && onInteract != null)
+            {
+                onInteract.Invoke();
+                return;
+            }
+        }
+
+        private void FixedUpdate()
+        {
+            if (controls.IsMoving)
+            {
+                Movement.Move(new Vector3(controls.Horizontal, 0f, controls.Vertical).normalized);
             }
         }
 
@@ -57,7 +89,6 @@ namespace Player
             gameLog.LogJump(jumpNum);
         }
 
-        #region Save
         [System.Serializable]
         public struct SaveData
         {
@@ -66,7 +97,6 @@ namespace Player
             public float[] position;
             public float[] rotation;
         };
-
         public object PrepareSaveData()
         {
             SaveData saveData = new();
@@ -85,7 +115,6 @@ namespace Player
 
             return saveData;
         }
-
         public void RestoreSaveData(object save)
         {
             SaveData saveData = (SaveData)save;
@@ -96,6 +125,5 @@ namespace Player
             Quaternion rot = new(saveData.rotation[0], saveData.rotation[1], saveData.rotation[2], saveData.rotation[3]);
             transform.SetPositionAndRotation(pos, rot);
         }
-        #endregion
     }
 }
