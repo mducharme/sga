@@ -13,10 +13,42 @@ namespace Combat
         public Health Health { get => health; private set { } }
         public Attributes Attributes { get => mergedAttributes; private set { } }
 
+        public delegate void OnHitByAttack(Result result);
+        public delegate void OnKilledByAttack(Result result);
+        public delegate void OnAttackHasHit(Result result);
+        public delegate void OnAttackHasKilled(Result result);
+
+        public OnHitByAttack onHitByAttack;
+        public OnKilledByAttack onKilledByAttack;
+        public OnAttackHasHit onAttackHasHit;
+        public OnAttackHasKilled onAttackHasKilled;
+
         private void Awake()
         {
             mergedAttributes.Add(coreAttributes);
             mergedAttributes.Add(transientAttributes);
+        }
+
+        public void HandleAttack(Attack attack)
+        {
+            Result result = Battle.Fight(attack, GetDefense(attack.type));
+
+            health.Damage(result.GetTotalDamage());
+
+            onHitByAttack?.Invoke(result);
+            if (attack.attacker != null)
+            {
+                attack.attacker.onAttackHasHit?.Invoke(result);
+            }
+
+            if (health.IsAlive() == false)
+            {
+                onKilledByAttack?.Invoke(result);
+                if (attack.attacker != null)
+                {
+                    attack.attacker.onAttackHasKilled?.Invoke(result);
+                }
+            }
         }
 
         public Attack GetAttack(CombatType type = CombatType.Base)
