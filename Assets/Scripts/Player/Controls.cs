@@ -9,6 +9,8 @@ namespace Player
         [SerializeField] private float vertical;
         [SerializeField] private bool isMoving;
 
+        [SerializeField] private bool interact;
+
         [SerializeField] private bool jump;
         [SerializeField] private bool isJumping;
         [SerializeField] private bool startedJumping;
@@ -17,6 +19,8 @@ namespace Player
         public float Horizontal { get => horizontal; private set { } }
         public float Vertical { get => vertical; private set { } }
         public bool IsMoving { get => isMoving; private set { } }
+
+        public bool Interact { get => interact; private set { } }
 
         public bool Jump { get => jump; private set { } }
         public bool IsJumping { get => isJumping; private set { } }
@@ -30,6 +34,8 @@ namespace Player
             horizontal = Input.GetAxisRaw("Horizontal");
             vertical = Input.GetAxisRaw("Vertical");
             isMoving = (horizontal != 0f || vertical != 0f);
+
+            interact = Input.GetButton("Fire1");
 
             jump = Input.GetButtonDown("Jump");
             isJumping = Input.GetButton("Jump");

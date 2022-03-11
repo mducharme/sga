@@ -10,7 +10,7 @@ namespace Game
         {
             if (instance != null)
             {
-                Destroy(this);
+                Destroy(this.gameObject);
                 return;
             }
 

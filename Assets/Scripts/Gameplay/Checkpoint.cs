@@ -9,7 +9,6 @@ namespace Gameplay
             FindObjectOfType<Game.SaveManager>().QuickSave();
         }
 
-        #region Collision Handlers
         private void OnCollisionEnter(Collision other)
         {
             if (other.gameObject.CompareTag("Player"))
@@ -41,6 +40,5 @@ namespace Gameplay
                 ActivateCheckpoint();
             }
         }
-        #endregion
     }
 }
