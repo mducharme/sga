@@ -16,7 +16,7 @@ namespace Player
         {
             if (instance != null)
             {
-                Destroy(this);
+                Destroy(this.gameObject);
                 return;
             }
 
@@ -34,8 +34,11 @@ namespace Player
 
         private void OnDestroy()
         {
-            topDownMovement.onMove -= OnMove;
-            topDownMovement.onJump -= OnJump;
+            if (topDownMovement != null)
+            {
+                topDownMovement.onMove -= OnMove;
+                topDownMovement.onJump -= OnJump;
+            }
         }
 
         /**
