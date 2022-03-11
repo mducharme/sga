@@ -29,7 +29,7 @@ namespace Combat
             mergedAttributes.Add(transientAttributes);
         }
 
-        public void HandleAttack(Attack attack)
+        public Result HandleAttack(Attack attack)
         {
             Result result = Battle.Fight(attack, GetDefense(attack.type));
 
@@ -49,6 +49,8 @@ namespace Combat
                     attack.attacker.onAttackHasKilled?.Invoke(result);
                 }
             }
+
+            return result;
         }
 
         public Attack GetAttack(CombatType type = CombatType.Base)
