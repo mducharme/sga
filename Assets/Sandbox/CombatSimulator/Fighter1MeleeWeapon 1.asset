@@ -26,5 +26,5 @@ MonoBehaviour:
     - type: {fileID: 11400000, guid: c651eb77976a6354bb559c022ac4f331, type: 2}
       amount: 1
     criticalChance: 0
-    knockbackForce: 0
+    knockbackForce: 5
     disableDuration: 0
