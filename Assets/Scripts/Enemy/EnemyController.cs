@@ -12,7 +12,6 @@ namespace Enemy
         [SerializeField] private EnemyData data;
         [SerializeField] private float deathDelay = 0f;
 
-        private Animator animator;
         private Combat.Fighter fighter;
         #endregion
 
@@ -24,7 +23,6 @@ namespace Enemy
         #region Unity Lifecycle
         void Awake()
         {
-            animator = GetComponent<Animator>();
             fighter = GetComponent<Combat.Fighter>();
 
             fighter.onHitByAttack += OnHitByAttack;
@@ -46,16 +44,6 @@ namespace Enemy
                 return;
             }
 
-
-            if (animator != null)
-            {
-                animator.SetBool("isHit", true);
-            }
-            if (data.hitSoundEffects != null)
-            {
-                data.hitSoundEffects.Play();
-            }
-
             // Knockback
             Rigidbody rb = fighter.GetComponent<Rigidbody>();
             if (rb != null)
@@ -73,25 +61,12 @@ namespace Enemy
 
         private IEnumerator Death()
         {
-            if (animator != null)
-            {
-                animator.SetBool("isDead", true);
-            }
-            if (data.deathSoundEffects != null)
-            {
-                data.deathSoundEffects.Play();
-            }
-            if (data.deathParticles != null)
-            {
-                data.deathParticles.Play();
-            }
-
             foreach(Loot loot in data.loots)
             {
                 if (Random.Range(0f, 1f) < loot.chance)
                 {
                     // @todo Drop item on scene.
-                    Player.PlayerController.instance.PickupItem(loot.item);
+                    //Player.PlayerController.instance.PickupItem(loot.item);
                 }
             }
 
@@ -101,10 +76,6 @@ namespace Enemy
 
         private void Reset()
         {
-            if (animator != null)
-            {
-                animator.SetBool("isDead", false);
-            }
             fighter.Health.HealAll();
             gameObject.SetActive(false);
             // Destroy(gameObject);
