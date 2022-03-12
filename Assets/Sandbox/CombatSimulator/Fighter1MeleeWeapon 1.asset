@@ -18,7 +18,7 @@ MonoBehaviour:
   description: 
   level: 1
   attackMode: 0
-  attacksPerSeconds: 1
+  attacksPerSeconds: 3
   attackDuration: 0.3
   attackModifier:
     type: 0

@@ -47,6 +47,15 @@ namespace Combat
         {
             mergedAttributes.Add(coreAttributes);
             mergedAttributes.Add(transientAttributes);
+
+            if (meleeWeapon != null)
+            {
+                meleeWeapon.Attacker = this;
+            }
+            if (rangedWeapon != null)
+            {
+                rangedWeapon.Attacker = this;
+            }
         }
 
         public Result HandleAttack(Attack attack)
