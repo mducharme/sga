@@ -6,6 +6,8 @@ namespace Combat
     {
         [SerializeField] private Health health;
 
+        [SerializeField] private Weapon.MeleeController meleeWeapon;
+
         [SerializeField] Attributes coreAttributes;
         [SerializeField] Attributes transientAttributes;
         private readonly Attributes mergedAttributes = new();
