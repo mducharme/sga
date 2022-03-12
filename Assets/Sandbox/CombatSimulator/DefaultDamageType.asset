@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 063ffd402b4a7f64c965819041ba4bcd, type: 3}
-  m_Name: TestDamageCategory
+  m_Name: DefaultDamageType
   m_EditorClassIdentifier: 
-  name: TestDamageCategory
+  name: DefaultDamageType
   description: This is test.
