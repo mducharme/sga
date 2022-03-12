@@ -16,6 +16,16 @@ namespace Player
         [SerializeField] private bool startedJumping;
         [SerializeField] private bool stoppedJumping;
 
+        [SerializeField] private bool attack;
+        [SerializeField] private bool isAttacking;
+        [SerializeField] private bool startedAttacking;
+        [SerializeField] private bool stoppedAttacking;
+
+        [SerializeField] private bool shoot;
+        [SerializeField] private bool isShooting;
+        [SerializeField] private bool startedShooting;
+        [SerializeField] private bool stoppedShooting;
+
         public float Horizontal { get => horizontal; private set { } }
         public float Vertical { get => vertical; private set { } }
         public bool IsMoving { get => isMoving; private set { } }
@@ -27,9 +37,21 @@ namespace Player
         public bool StartedJumping { get => startedJumping; private set { } }
         public bool StoppedJumping { get => stoppedJumping; private set { } }
 
+        public bool Attack { get => attack; private set { } }
+        public bool IsAttacking { get => isAttacking; private set { } }
+        public bool StartedAttacking { get => startedAttacking; private set { } }
+        public bool StoppedAttacking { get => stoppedAttacking; private set { } }
+
+        public bool Shoot { get => shoot; private set { } }
+        public bool IsShooting { get => isShooting; private set { } }
+        public bool StartedShooting { get => startedShooting; private set { } }
+        public bool StoppedShooting { get => stoppedShooting; private set { } }
+
         public void HandleInput()
         {
             bool wasJumping = isJumping;
+            bool wasAttacking = isAttacking;
+            bool wasShooting = isShooting;
 
             horizontal = Input.GetAxisRaw("Horizontal");
             vertical = Input.GetAxisRaw("Vertical");
@@ -41,6 +63,16 @@ namespace Player
             isJumping = Input.GetButton("Jump");
             startedJumping = !wasJumping && isJumping;
             stoppedJumping = wasJumping && !isJumping;
+
+            attack = Input.GetButtonDown("Fire1");
+            isAttacking = Input.GetButton("Fire1");
+            startedAttacking = !wasAttacking && isAttacking;
+            stoppedAttacking = wasAttacking && !isAttacking;
+
+            shoot = Input.GetButtonDown("Fire2");
+            isShooting = Input.GetButton("Fire2");
+            startedShooting = !wasShooting && isShooting;
+            stoppedShooting = wasShooting && !isShooting;
         }
     }
 }
