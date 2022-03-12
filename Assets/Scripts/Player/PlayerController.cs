@@ -127,11 +127,11 @@ namespace Player
                 return;
             }
 
-            if (controls.Attack)
+            if (controls.Attack && fighter.MeleeWeapon != null)
             {
                 fighter.MeleeWeapon.Attack();
             }
-            if (controls.Shoot)
+            if (controls.Shoot && fighter.RangedWeapon != null)
             {
                 fighter.RangedWeapon.Shoot();
             }
@@ -208,7 +208,7 @@ namespace Player
          */
         private void OnMeleeAttack()
         {
-            //gameLog.MeleeWeapons.LogAttack(fighter.MeleeWeapon.Data);
+            gameLog.MeleeWeapons.LogAttack(fighter.MeleeWeapon.Data);
         }
 
         /**
@@ -216,9 +216,8 @@ namespace Player
          */
         private void OnRangedShoot()
         {
-            //gameLog.RangedWeapons.LogShoot(fighter.RangedWeapon.Data);
+            gameLog.RangedWeapons.LogShoot(fighter.RangedWeapon.Data);
         }
-
 
         /**
          * When an item is added to the inventory.
