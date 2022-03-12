@@ -129,6 +129,15 @@ namespace Player
                 onInteract.Invoke();
                 return;
             }
+
+            if (controls.Attack)
+            {
+                fighter.MeleeWeapon.Attack();
+            }
+            if (controls.Shoot)
+            {
+                fighter.RangedWeapon.Shoot();
+            }
         }
 
         private void FixedUpdate()
