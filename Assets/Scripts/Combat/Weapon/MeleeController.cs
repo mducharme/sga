@@ -60,7 +60,9 @@ namespace Combat.Weapon
 
         private IEnumerator StartAttack()
         {
-            attackCollision.Attack = attacker.GetAttack(CombatType.Melee);
+            Attack attack = attacker.GetAttack(CombatType.Melee);
+            attack.AddModifier(data.attackModifier);
+            attackCollision.Attack = attack;
             attackCollision.gameObject.SetActive(true);
             yield return new WaitForSeconds(data.attackDuration);
             attackCollision.Attack = null;

@@ -148,8 +148,12 @@ namespace Combat.Weapon
         {
             fire.SetActive(true);
 
+            Attack attack = attacker.GetAttack(CombatType.Ranged);
+            attack.AddModifier(data.attackModifier);
+            attack.AddModifier(data.projectile.attackModifier);
+
             AttackCollision attackCollision = fire.GetComponent<AttackCollision>();
-            attackCollision.Attack = attacker.GetAttack(CombatType.Ranged);
+            attackCollision.Attack = attack;
 
             yield return new WaitForSeconds(data.fireLifetime);
             Destroy(fire);
