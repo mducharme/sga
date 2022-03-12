@@ -172,6 +172,8 @@ MonoBehaviour:
   health:
     maxHealth: 0
     currentHealth: 0
+  meleeWeapon: {fileID: 0}
+  rangedWeapon: {fileID: 0}
   coreAttributes:
     moveSpeed: 0
     jumpForce: 0
@@ -565,7 +567,6 @@ GameObject:
   m_Component:
   - component: {fileID: 967941145}
   - component: {fileID: 967941146}
-  - component: {fileID: 967941147}
   m_Layer: 0
   m_Name: Fighter 1
   m_TagString: Untagged
@@ -605,6 +606,8 @@ MonoBehaviour:
   health:
     maxHealth: 10
     currentHealth: 10
+  meleeWeapon: {fileID: 0}
+  rangedWeapon: {fileID: 0}
   coreAttributes:
     moveSpeed: 0
     jumpForce: 0
@@ -612,7 +615,14 @@ MonoBehaviour:
     dashForce: 0
     maxHealth: 0
     attacks: []
-    defenses: []
+    defenses:
+    - type: 0
+      protections:
+      - type: {fileID: 11400000, guid: c651eb77976a6354bb559c022ac4f331, type: 2}
+        amount: 1
+      criticalResist: 0
+      knockbackResist: 0
+      disableResist: 0
     meleeSpeed: 0
     rangedSpeed: 0
     luck: 0
@@ -627,20 +637,6 @@ MonoBehaviour:
     meleeSpeed: 0
     rangedSpeed: 0
     luck: 0
---- !u!114 &967941147
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 967941144}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed379ecc6ce256a4fa135f57ad38ce5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fighter1: {fileID: 0}
-  fighter2: {fileID: 0}
 --- !u!1 &1173305418
 GameObject:
   m_ObjectHideFlags: 0

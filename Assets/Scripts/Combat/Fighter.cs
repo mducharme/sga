@@ -8,11 +8,29 @@ namespace Combat
 
         [SerializeField] private Weapon.MeleeController meleeWeapon;
 
+        [SerializeField] private Weapon.RangedController rangedWeapon;
+
         [SerializeField] Attributes coreAttributes;
         [SerializeField] Attributes transientAttributes;
         private readonly Attributes mergedAttributes = new();
 
         public Health Health { get => health; private set { } }
+        public Weapon.MeleeController MeleeWeapon
+        {
+            get => meleeWeapon; set
+            {
+                meleeWeapon = value;
+                meleeWeapon.Attacker = this;
+            }
+        }
+        public Weapon.RangedController RangedWeapon
+        {
+            get => rangedWeapon; set
+            {
+                rangedWeapon = value;
+                rangedWeapon.Attacker = this;
+            }
+        }
         public Attributes Attributes { get => mergedAttributes; private set { } }
 
         public delegate void OnHitByAttack(Result result);

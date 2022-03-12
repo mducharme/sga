@@ -28,8 +28,6 @@ namespace Combat.Weapon
 
         [Header("Stats")]
         public AttackModifier attackModifier;
-        public DefenseModifier defenseModifier;
-        //public BuffChance[] buffChances;
 
         public enum AttackMode
         {
