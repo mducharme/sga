@@ -6,7 +6,7 @@ namespace Combat
     public class Defense
     {
         public readonly CombatType type;
-        public readonly Fighter defender;
+        public readonly IDefender defender;
 
         public List<Damage> protections = new();
 
@@ -14,7 +14,7 @@ namespace Combat
         public float knockbackResist;
         public float disableResist;
 
-        public Defense(CombatType type = CombatType.Base, Fighter defender = null)
+        public Defense(CombatType type = CombatType.Base, IDefender defender = null)
         {
             this.type = type;
             this.defender = defender;

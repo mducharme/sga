@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Combat
 {
-    public class Fighter : MonoBehaviour, Game.ISaveable
+    public class Fighter : MonoBehaviour, Game.ISaveable, IAttacker, IDefender
     {
         [SerializeField] private Health health;
 
@@ -64,22 +64,41 @@ namespace Combat
 
             health.Damage(result.GetTotalDamage());
 
-            onHitByAttack?.Invoke(result);
+            HitByAttack(result);
             if (attack.attacker != null)
             {
-                attack.attacker.onAttackHasHit?.Invoke(result);
+                attack.attacker.AttackHasHit(result);
             }
 
             if (health.IsAlive() == false)
             {
-                onKilledByAttack?.Invoke(result);
+                KilledByAttack(result);
                 if (attack.attacker != null)
                 {
-                    attack.attacker.onAttackHasKilled?.Invoke(result);
+                    attack.attacker.AttackHasKilled(result);
                 }
             }
 
             return result;
+        }
+        public void HitByAttack(Result result)
+        {
+            onHitByAttack?.Invoke(result);
+        }
+
+        public void KilledByAttack(Result result)
+        {
+            onKilledByAttack?.Invoke(result);
+        }
+
+        public void AttackHasHit(Result result)
+        {
+            onAttackHasHit?.Invoke(result);
+        }
+
+        public void AttackHasKilled(Result result)
+        {
+            onAttackHasKilled?.Invoke(result);
         }
 
         public Attack GetAttack(CombatType type = CombatType.Base)

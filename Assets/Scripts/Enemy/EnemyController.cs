@@ -43,7 +43,7 @@ namespace Enemy
                 // Attack missed (prevented by defense)
                 return;
             }
-
+    
             // Knockback
             Rigidbody rb = fighter.GetComponent<Rigidbody>();
             if (rb != null)
