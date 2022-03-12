@@ -14,7 +14,6 @@ namespace Combat
         public float knockbackForce;
         public float disableDuration;
 
-
         public Result(Attack attack, Defense defense)
         {
             this.attack = attack;
