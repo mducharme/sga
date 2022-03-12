@@ -22,7 +22,6 @@ namespace Player
 
         private TopDownMovement topDownMovement;
 
-
         public Combat.Fighter Fighter { get => fighter; private set { } }
         public Inventory.InventoryManager Inventory { get => inventory; private set { } }
         public Equipment.EquipmentManager Equipment { get => equipment; private set { } }
@@ -43,6 +42,20 @@ namespace Player
             DontDestroyOnLoad(this.gameObject);
 
             fighter = GetComponent<Combat.Fighter>();
+            fighter.Health.onChange += OnHealthChange;
+            fighter.onHitByAttack += OnHitByAttack;
+            fighter.onKilledByAttack += OnKilledByAttack;
+            fighter.onAttackHasHit += OnAttackHasHit;
+            fighter.onAttackHasKilled += OnAttackHasKilled;
+
+            if (fighter.RangedWeapon != null)
+            {
+                fighter.RangedWeapon.onShoot += OnRangedShoot;
+            }
+            if (fighter.MeleeWeapon != null)
+            {
+                fighter.MeleeWeapon.onAttack += OnMeleeAttack; 
+            }
 
             inventory = GetComponent<Inventory.InventoryManager>();
             equipment = GetComponent<Equipment.EquipmentManager>();
@@ -61,14 +74,28 @@ namespace Player
             gameLog = GetComponent<GameLog>();
             controls = GetComponent<Controls>();
 
+
         }
 
         private void OnDestroy()
         {
-            if (topDownMovement != null)
+            if (fighter != null )
             {
-                topDownMovement.onMove -= OnMove;
-                topDownMovement.onJump -= OnJump;
+                fighter.Health.onChange -= OnHealthChange;
+
+                fighter.onHitByAttack -= OnHitByAttack;
+                fighter.onKilledByAttack -= OnKilledByAttack;
+                fighter.onAttackHasHit -= OnAttackHasHit;
+                fighter.onAttackHasKilled -= OnAttackHasKilled;
+
+                if (fighter.RangedWeapon != null)
+                {
+                    fighter.RangedWeapon.onShoot -= OnRangedShoot;
+                }
+                if (fighter.MeleeWeapon != null)
+                { 
+                    fighter.MeleeWeapon.onAttack -= OnMeleeAttack;
+                }
             }
             if (inventory != null)
             {
@@ -80,6 +107,11 @@ namespace Player
             {
                 equipment.onEquip -= OnEquipItem;
                 equipment.onUnequip -= OnUnequipItem;
+            }
+            if (topDownMovement != null)
+            {
+                topDownMovement.onMove -= OnMove;
+                topDownMovement.onJump -= OnJump;
             }
         }
 
@@ -108,6 +140,14 @@ namespace Player
         }
 
         /**
+         * When fighter.health changes.
+         */
+        private void OnHealthChange(int delta, int currentHealth)
+        {
+            // @todo UI, Sound and vfx
+        }
+
+        /**
          * When the player is moving.
          */
         private void OnMove(Vector3 movement)
@@ -121,6 +161,40 @@ namespace Player
         private void OnJump(int jumpNum)
         {
             gameLog.LogJump(jumpNum);
+        }
+
+        /**
+         * When a battle results in the player getting hit.
+         */
+        private void OnHitByAttack(Combat.Result result)
+        {
+            return;
+        }
+
+        /**
+         * When a battle results in the player getting killed.
+         */
+        private void OnKilledByAttack(Combat.Result result)
+        {
+            // @todo Handle death
+            return;
+        }
+
+        /**
+         * When a battle results in the player hitting an enemy.
+         */
+        private void OnAttackHasHit(Combat.Result result)
+        {
+            return;
+        }
+
+        /**
+         * When a battle results in the player killing an enemy.
+         */
+        private void OnAttackHasKilled(Combat.Result result)
+        {
+            // @todo XP
+            return;
         }
 
         /**
@@ -139,12 +213,13 @@ namespace Player
             //gameLog.RangedWeapons.LogShoot(fighter.RangedWeapon.Data);
         }
 
+
         /**
          * When an item is added to the inventory.
          */
         private void OnAddInventoryItem(Inventory.ItemData item)
         {
-            // @todo What should happen here?
+            return;
         }
 
         /**
@@ -152,7 +227,6 @@ namespace Player
          */
         private void OnRemoveInventoryItem(Inventory.ItemData item)
         {
-            // @todo What should happen here?
             return;
         }
 
