@@ -73,8 +73,6 @@ namespace Player
 
             gameLog = GetComponent<GameLog>();
             controls = GetComponent<Controls>();
-
-
         }
 
         private void OnDestroy()
@@ -102,7 +100,6 @@ namespace Player
                 inventory.onAddItem -= OnAddInventoryItem;
                 inventory.onRemoveItem -= OnRemoveInventoryItem;
             }
-
             if (equipment != null)
             {
                 equipment.onEquip -= OnEquipItem;

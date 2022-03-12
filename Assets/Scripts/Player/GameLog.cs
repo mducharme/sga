@@ -5,6 +5,7 @@ namespace Player
     public class GameLog : MonoBehaviour, Game.ISaveable
     {
         [SerializeField] private Log.MovementLog movementLog = new();
+        [SerializeField] private Log.CombatLog combatLog = new();
 
         public void LogMovement(Vector3 movement)
         {
@@ -23,12 +24,14 @@ namespace Player
             public int totalXp;
             public int totalCollectibles;
 
+            public Log.CombatLog.SaveData combatLog;
             public Log.MovementLog.SaveData movementLog;
         }
 
         public object PrepareSaveData()
         {
             SaveData saveData = new();
+            saveData.combatLog = (Log.CombatLog.SaveData)combatLog.PrepareSaveData();
             saveData.movementLog = (Log.MovementLog.SaveData)movementLog.PrepareSaveData();
             return saveData;
         }
@@ -36,6 +39,7 @@ namespace Player
         public void RestoreSaveData(object save)
         {
             SaveData saveData = (SaveData)save;
+            combatLog.RestoreSaveData(saveData.combatLog);
             movementLog.RestoreSaveData(saveData.movementLog);
         }
         #endregion
