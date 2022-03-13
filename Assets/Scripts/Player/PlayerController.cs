@@ -170,6 +170,14 @@ namespace Player
         }
 
         /**
+         * When the player is dashing.
+         */
+        private void OnDash()
+        {
+            gameLog.LogDash();
+        }
+
+        /**
          * When a battle results in the player getting hit.
          */
         private void OnHitByAttack(Combat.Result result)
