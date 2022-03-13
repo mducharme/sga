@@ -10,7 +10,6 @@ namespace Game
         public GameObject Create(Transform parent, Combat.Result result)
         {
             GameObject popupObject = Instantiate(popupPrefab);
-            popupObject.transform.SetParent(parent);
             popupObject.transform.position = parent.position;
 
             DamagePopup popup = popupObject.GetComponent<DamagePopup>();
