@@ -16,6 +16,11 @@ namespace Player
         [SerializeField] private bool startedJumping;
         [SerializeField] private bool stoppedJumping;
 
+        [SerializeField] private bool dash;
+        [SerializeField] private bool isDashing;
+        [SerializeField] private bool startedDashing;
+        [SerializeField] private bool stoppedDashing;
+
         [SerializeField] private bool attack;
         [SerializeField] private bool isAttacking;
         [SerializeField] private bool startedAttacking;
@@ -37,6 +42,11 @@ namespace Player
         public bool StartedJumping { get => startedJumping; private set { } }
         public bool StoppedJumping { get => stoppedJumping; private set { } }
 
+        public bool Dash { get => dash; private set { } }
+        public bool IsDashing { get => isDashing; private set { } }
+        public bool StartedDashing { get => startedDashing; private set { } }
+        public bool StoppedDashing { get => stoppedDashing; private set { } }
+
         public bool Attack { get => attack; private set { } }
         public bool IsAttacking { get => isAttacking; private set { } }
         public bool StartedAttacking { get => startedAttacking; private set { } }
@@ -50,6 +60,7 @@ namespace Player
         public void HandleInput()
         {
             bool wasJumping = isJumping;
+            bool wasDashing = isDashing;
             bool wasAttacking = isAttacking;
             bool wasShooting = isShooting;
 
@@ -63,6 +74,11 @@ namespace Player
             isJumping = Input.GetButton("Jump");
             startedJumping = !wasJumping && isJumping;
             stoppedJumping = wasJumping && !isJumping;
+
+            dash = Input.GetButtonDown("Dash");
+            isDashing = Input.GetButton("Dash");
+            startedDashing = !wasDashing && isDashing;
+            stoppedDashing = wasJumping && !isDashing;
 
             attack = Input.GetButtonDown("Fire1");
             isAttacking = Input.GetButton("Fire1");

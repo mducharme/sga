@@ -13,6 +13,8 @@ namespace Player
         [SerializeField] private float jumpForce = 25f;
         [SerializeField] private int numJumps = 1;
 
+        [SerializeField] private float dashForce = 20f;
+
         [SerializeField] protected float gravityVelocityThreshold = 1f;
         [SerializeField] protected float gravityModifier = 150f;
 
@@ -26,6 +28,9 @@ namespace Player
 
         public delegate void OnJump(int jumpNum);
         public OnJump onJump;
+
+        public delegate void OnDash();
+        public OnDash onDash;
 
         private void Awake()
         {
@@ -70,6 +75,11 @@ namespace Player
                 body.AddForce(jumpForce * body.mass * Vector3.up, ForceMode.Impulse);
 
             }
+        }
+        public void Dash()
+        {
+            onDash?.Invoke();
+            body.AddForce(dashForce * body.mass * transform.forward, ForceMode.Impulse);
         }
 
         private void CheckGrounded()
