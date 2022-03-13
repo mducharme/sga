@@ -12,8 +12,9 @@ namespace Game
 
         private void Update()
         {
-            transform.LookAt(Camera.main.transform);
             transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y + moveSpeed * Time.deltaTime, transform.localPosition.z);
+            //transform.LookAt(Camera.main.transform.position, -Vector3.up);
+            transform.rotation = Quaternion.LookRotation(transform.position - Camera.main.transform.position);
         }
 
         public void SetResult(Combat.Result result)

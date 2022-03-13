@@ -8,25 +8,27 @@ namespace Enemy
     [RequireComponent(typeof(Combat.Fighter))]
     public class EnemyController : MonoBehaviour
     {
-        #region Fields
         [SerializeField] private EnemyData data;
         [SerializeField] private float deathDelay = 0f;
 
-        private Combat.Fighter fighter;
-        #endregion
+        [SerializeField] private Transform damagePopupContainer;
 
-        #region Properties
+        private Combat.Fighter fighter;
+
         public EnemyData Data { get => data; private set { } }
         public Combat.Fighter Fighter { get => fighter; private set { } }
-        #endregion
 
-        #region Unity Lifecycle
         void Awake()
         {
             fighter = GetComponent<Combat.Fighter>();
 
             fighter.onHitByAttack += OnHitByAttack;
             fighter.onKilledByAttack += OnKilledByAttack;
+
+            if (damagePopupContainer == null)
+            {
+                damagePopupContainer = transform;
+            }
         }
 
         void OnDestroy()
@@ -34,7 +36,6 @@ namespace Enemy
             fighter.onHitByAttack -= OnHitByAttack;
             fighter.onKilledByAttack -= OnKilledByAttack;
         }
-        #endregion
 
         private void OnHitByAttack(Combat.Result result)
         {
@@ -52,7 +53,7 @@ namespace Enemy
             }
 
             Game.DamagePopupManager popup = FindObjectOfType<Game.DamagePopupManager>();
-            popup.Create(transform, result);
+            popup.Create(damagePopupContainer, result);
         }
 
         private void OnKilledByAttack(Combat.Result result)
