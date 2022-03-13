@@ -343,7 +343,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
-  m_LocalRotation: {x: 0.54138577, y: 0.00000002893337, z: -0.000000018630583, w: 0.8407743}
+  m_LocalRotation: {x: 0.54138577, y: -0.00000002893337, z: 0.000000018630583, w: 0.8407743}
   m_LocalPosition: {x: 0, y: 23, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -595,7 +595,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 508997809}
-  m_LocalRotation: {x: 0.54138577, y: 0.00000002893337, z: -0.000000018630583, w: 0.8407743}
+  m_LocalRotation: {x: 0.54138577, y: -0.00000002893337, z: 0.000000018630583, w: 0.8407743}
   m_LocalPosition: {x: 0, y: 23, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -603,6 +603,52 @@ Transform:
   - {fileID: 1617765326}
   m_Father: {fileID: 0}
   m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &698833446
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 698833448}
+  - component: {fileID: 698833447}
+  m_Layer: 0
+  m_Name: DamagePopupManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &698833447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 698833446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef6ece93d571b1040b16f197e967a294, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  popupPrefab: {fileID: 8365224780030179356, guid: 13c02789871a7e145bf7266549eebc60,
+    type: 3}
+--- !u!4 &698833448
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 698833446}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0.5525}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &832575517
 GameObject:
@@ -878,6 +924,26 @@ PrefabInstance:
       propertyPath: meleeWeapon
       value: 
       objectReference: {fileID: 1272107164}
+    - target: {fileID: 1486908879632858217, guid: c887251a0c53f4fd48c21b1a5f7ebf6c,
+        type: 3}
+      propertyPath: coreAttributes.attacks.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1486908879632858217, guid: c887251a0c53f4fd48c21b1a5f7ebf6c,
+        type: 3}
+      propertyPath: coreAttributes.attacks.Array.data[0].criticalChance
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1486908879632858217, guid: c887251a0c53f4fd48c21b1a5f7ebf6c,
+        type: 3}
+      propertyPath: coreAttributes.attacks.Array.data[0].damages.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1486908879632858217, guid: c887251a0c53f4fd48c21b1a5f7ebf6c,
+        type: 3}
+      propertyPath: coreAttributes.attacks.Array.data[0].damages.Array.data[0].amount
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8779335695959605682, guid: c887251a0c53f4fd48c21b1a5f7ebf6c,
         type: 3}
       propertyPath: m_RootOrder

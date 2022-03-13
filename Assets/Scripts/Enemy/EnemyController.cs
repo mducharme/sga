@@ -51,7 +51,8 @@ namespace Enemy
                 rb.AddForce(30 * rb.mass * -transform.forward, ForceMode.Impulse);
             }
 
-            //DamagePopup.Create(transform.position, result.GetTotalDamage());
+            Game.DamagePopupManager popup = FindObjectOfType<Game.DamagePopupManager>();
+            popup.Create(transform, result);
         }
 
         private void OnKilledByAttack(Combat.Result result)
