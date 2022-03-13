@@ -343,7 +343,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
-  m_LocalRotation: {x: 0.54138577, y: -0.00000002893337, z: 0.000000018630583, w: 0.8407743}
+  m_LocalRotation: {x: 0.54138577, y: 0.00000002893337, z: -0.000000018630583, w: 0.8407743}
   m_LocalPosition: {x: 0, y: 23, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -595,7 +595,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 508997809}
-  m_LocalRotation: {x: 0.54138577, y: -0.00000002893337, z: 0.000000018630583, w: 0.8407743}
+  m_LocalRotation: {x: 0.54138577, y: 0.00000002893337, z: -0.000000018630583, w: 0.8407743}
   m_LocalPosition: {x: 0, y: 23, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -829,8 +829,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health:
-    maxHealth: 10
-    currentHealth: 10
+    maxHealth: 20
+    currentHealth: 20
   meleeWeapon: {fileID: 0}
   rangedWeapon: {fileID: 0}
   coreAttributes:
@@ -936,8 +936,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1486908879632858217, guid: c887251a0c53f4fd48c21b1a5f7ebf6c,
         type: 3}
+      propertyPath: coreAttributes.attacks.Array.data[0].knockbackForce
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1486908879632858217, guid: c887251a0c53f4fd48c21b1a5f7ebf6c,
+        type: 3}
       propertyPath: coreAttributes.attacks.Array.data[0].damages.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1486908879632858217, guid: c887251a0c53f4fd48c21b1a5f7ebf6c,
         type: 3}
