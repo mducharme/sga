@@ -70,8 +70,8 @@ namespace Player
 
             interact = Input.GetButton("Attack");
 
-            jump = Input.GetAxis("Jump") > 0 || Input.GetButtonDown("Jump");
-            isJumping = Input.GetAxis("Jump") > 0 || Input.GetButton("Jump");
+            jump = Input.GetButtonDown("Jump");
+            isJumping = Input.GetButton("Jump");
             startedJumping = !wasJumping && isJumping;
             stoppedJumping = wasJumping && !isJumping;
 

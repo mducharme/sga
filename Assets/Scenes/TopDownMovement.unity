@@ -816,6 +816,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 37170cb652f76b14d9bb82ea4098b863, type: 2}
   deathDelay: 0
+  damagePopupContainer: {fileID: 0}
 --- !u!114 &1113986814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -948,6 +949,16 @@ PrefabInstance:
         type: 3}
       propertyPath: coreAttributes.attacks.Array.data[0].damages.Array.data[0].amount
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8779335695959605680, guid: c887251a0c53f4fd48c21b1a5f7ebf6c,
+        type: 3}
+      propertyPath: dashForce
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 8779335695959605680, guid: c887251a0c53f4fd48c21b1a5f7ebf6c,
+        type: 3}
+      propertyPath: dashCooldown
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 8779335695959605682, guid: c887251a0c53f4fd48c21b1a5f7ebf6c,
         type: 3}

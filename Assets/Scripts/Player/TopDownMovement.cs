@@ -14,6 +14,7 @@ namespace Player
         [SerializeField] private int numJumps = 1;
 
         [SerializeField] private float dashForce = 20f;
+        [SerializeField] private float dashCooldown = 0.5f;
 
         [SerializeField] protected float gravityVelocityThreshold = 1f;
         [SerializeField] protected float gravityModifier = 150f;
@@ -22,6 +23,7 @@ namespace Player
         private CapsuleCollider groundCollider;
         private bool isGrounded;
         private int currentJumpNum;
+        private float dashTimer;
 
         public delegate void OnMove(Vector3 movement);
         public OnMove onMove;
@@ -78,6 +80,12 @@ namespace Player
         }
         public void Dash()
         {
+            if (Time.time < dashTimer)
+            {
+                return;
+            }
+            dashTimer = Time.time + dashCooldown;
+
             onDash?.Invoke();
             body.AddForce(dashForce * body.mass * transform.forward, ForceMode.Impulse);
         }
