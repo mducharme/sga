@@ -187,7 +187,17 @@ namespace Player
          */
         private void OnHitByAttack(Combat.Result result)
         {
-            return;
+            // @todo Animation, sfx and vfx.
+            Enemy.EnemyController enemy = result.attack.attacker.GetComponent<Enemy.EnemyController>();
+            if (enemy)
+            {
+                gameLog.LogHitByEnemy(result, enemy.Data);
+            }
+            else
+            {
+                // Hit by trap or any other non-enemy entities.
+                gameLog.LogHit(result);
+            }
         }
 
         /**
@@ -195,8 +205,20 @@ namespace Player
          */
         private void OnKilledByAttack(Combat.Result result)
         {
-            // @todo Handle death
-            return;
+            // @todo Animation, sfx and vfx.
+
+            Enemy.EnemyController enemy = result.attack.attacker.GetComponent<Enemy.EnemyController>();
+            if (enemy)
+            {
+                gameLog.LogKilledByEnemy(enemy.Data);
+            }
+            else
+            {
+                // Killed by a trap or any other non-enemy entities.
+                gameLog.LogDeath();
+            }
+
+            // @todo Handle death.
         }
 
         /**
@@ -204,7 +226,11 @@ namespace Player
          */
         private void OnAttackHasHit(Combat.Result result)
         {
-            return;
+            Enemy.EnemyController enemy = result.defense.defender.GetComponent<Enemy.EnemyController>();
+            if (enemy)
+            {
+                gameLog.LogEnemyHit(result, enemy.Data);
+            }
         }
 
         /**
@@ -212,8 +238,12 @@ namespace Player
          */
         private void OnAttackHasKilled(Combat.Result result)
         {
-            // @todo XP
-            return;
+            Enemy.EnemyController enemy = result.defense.defender.GetComponent<Enemy.EnemyController>();
+            if (enemy)
+            {
+                //xp += enemy.Data.xp;
+                gameLog.LogEnemyKilled(enemy.Data);
+            }
         }
 
         /**
