@@ -9,10 +9,12 @@ namespace Player.Log
         [SerializeField] private float distanceTraveled;
         [SerializeField] private int numJumps;
         [SerializeField] private int numMultiJumps;
+        [SerializeField] private int numDash;
 
         public float DistanceTraveled { get => distanceTraveled; private set { } }
-        public float NumJumps { get => numJumps; private set { } }
-        public float NumMultiJumps { get => numMultiJumps; private set { } }
+        public int NumJumps { get => numJumps; private set { } }
+        public int NumMultiJumps { get => numMultiJumps; private set { } }
+        public int NumDash { get => numDash; private set { } }
 
         public void LogMovement(Vector3 movement)
         {
@@ -31,8 +33,11 @@ namespace Player.Log
                 numJumps++;
             }
         }
+        public void LogDash()
+        {
+            numDash++;
+        }
 
-        #region Save
         [System.Serializable]
         public struct SaveData
         {
@@ -48,6 +53,7 @@ namespace Player.Log
             saveData.distanceTraveled = distanceTraveled;
             saveData.numJumps = numJumps;
             saveData.numMultiJumps = numMultiJumps;
+            saveData.numDash = numDash;
             return saveData;
         }
 
@@ -57,7 +63,7 @@ namespace Player.Log
             distanceTraveled = saveData.distanceTraveled;
             numJumps = saveData.numJumps;
             numMultiJumps = saveData.numMultiJumps;
+            numDash = saveData.numDash;
         }
-        #endregion
     }
 }

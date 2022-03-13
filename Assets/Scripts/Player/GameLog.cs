@@ -24,6 +24,11 @@ namespace Player
             movementLog.LogJump(jumpNum);
         }
 
+        public void LogDash()
+        {
+            movementLog.LogDash();
+        }
+
         public void LogMeleeAttack(Combat.Weapon.MeleeData melee)
         {
             meleeWeaponsLog.LogAttack(melee);
