@@ -4,6 +4,8 @@ namespace Player
 {
     public class GameLog : MonoBehaviour, Game.ISaveable
     {
+
+        [SerializeField] private int totalXp;
         [SerializeField] private Log.MovementLog movementLog = new();
         [SerializeField] private Log.CombatLog combatLog = new();
         [SerializeField] private Log.MeleeWeaponsLog meleeWeaponsLog = new();
@@ -15,6 +17,11 @@ namespace Player
         public Log.MeleeWeaponsLog MeleeWeapons { get => meleeWeaponsLog; private set { } }
         public Log.RangedWeaponsLog RangedWeapons { get => rangedWeaponsLog; private set { } }
         public Log.EnemiesLog Enemies { get => enemiesLog; private set { } }
+
+        public void LogXp(int amount)
+        {
+            totalXp += amount;
+        }
 
         public void LogMovement(Vector3 movement)
         {
@@ -61,7 +68,7 @@ namespace Player
 
         public void LogEnemyKilled(Enemy.EnemyData enemy)
         {
-            //LogXp(enemy.xp);
+            LogXp(enemy.xp);
 
             enemiesLog.LogEnemyKilled(enemy);
             combatLog.LogEnemyKill();
@@ -96,6 +103,7 @@ namespace Player
         public object PrepareSaveData()
         {
             SaveData saveData = new();
+            saveData.totalXp = totalXp;
             saveData.combatLog = (Log.CombatLog.SaveData)combatLog.PrepareSaveData();
             saveData.movementLog = (Log.MovementLog.SaveData)movementLog.PrepareSaveData();
             saveData.meleeWeaponsLog = (Log.MeleeWeaponsLog.SaveData)meleeWeaponsLog.PrepareSaveData();
@@ -107,6 +115,7 @@ namespace Player
         public void RestoreSaveData(object save)
         {
             SaveData saveData = (SaveData)save;
+            totalXp = saveData.totalXp;
             combatLog.RestoreSaveData(saveData.combatLog);
             movementLog.RestoreSaveData(saveData.movementLog);
             meleeWeaponsLog.RestoreSaveData(saveData.meleeWeaponsLog);

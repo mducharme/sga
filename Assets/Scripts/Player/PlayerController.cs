@@ -12,6 +12,8 @@ namespace Player
     {
         static public PlayerController instance;
 
+        [SerializeField] private int xp;
+
         private Combat.Fighter fighter;
 
         private Inventory.InventoryManager inventory;
@@ -25,6 +27,7 @@ namespace Player
         public Combat.Fighter Fighter { get => fighter; private set { } }
         public Inventory.InventoryManager Inventory { get => inventory; private set { } }
         public Equipment.EquipmentManager Equipment { get => equipment; private set { } }
+        public int Xp { get => xp; private set { } }
         public TopDownMovement Movement { get => topDownMovement; private set { } }
 
         public delegate void OnInteract();
@@ -241,7 +244,7 @@ namespace Player
             Enemy.EnemyController enemy = result.defense.defender.GetComponent<Enemy.EnemyController>();
             if (enemy)
             {
-                //xp += enemy.Data.xp;
+                xp += enemy.Data.xp;
                 gameLog.LogEnemyKilled(enemy.Data);
             }
         }
@@ -330,6 +333,7 @@ namespace Player
         [System.Serializable]
         public struct SaveData
         {
+            public int xp;
 
             public Combat.Fighter.SaveData fighter;
             public Inventory.InventoryManager.SaveData inventory;
@@ -342,6 +346,9 @@ namespace Player
         public object PrepareSaveData()
         {
             SaveData saveData = new();
+            
+            saveData.xp = xp;
+
             saveData.fighter = (Combat.Fighter.SaveData)fighter.PrepareSaveData();
             saveData.inventory = (Inventory.InventoryManager.SaveData)inventory.PrepareSaveData();
             saveData.equipment = (Equipment.EquipmentManager.SaveData)equipment.PrepareSaveData();
@@ -363,6 +370,8 @@ namespace Player
         public void RestoreSaveData(object save)
         {
             SaveData saveData = (SaveData)save;
+
+            xp = saveData.xp;
 
             fighter.RestoreSaveData(saveData.fighter);
             inventory.RestoreSaveData(saveData.inventory);
