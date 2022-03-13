@@ -121,6 +121,11 @@ namespace Player
                 Movement.Jump();
             }
 
+            if (controls.Dash)
+            {
+                Movement.Dash();
+            }
+
             if (controls.Interact && onInteract != null)
             {
                 onInteract.Invoke();

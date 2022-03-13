@@ -68,25 +68,25 @@ namespace Player
             vertical = Input.GetAxisRaw("Vertical");
             isMoving = (horizontal != 0f || vertical != 0f);
 
-            interact = Input.GetButton("Fire1");
+            interact = Input.GetButton("Attack");
 
-            jump = Input.GetButtonDown("Jump");
-            isJumping = Input.GetButton("Jump");
+            jump = Input.GetAxis("Jump") > 0 || Input.GetButtonDown("Jump");
+            isJumping = Input.GetAxis("Jump") > 0 || Input.GetButton("Jump");
             startedJumping = !wasJumping && isJumping;
             stoppedJumping = wasJumping && !isJumping;
 
-            dash = Input.GetButtonDown("Dash");
-            isDashing = Input.GetButton("Dash");
+            dash = Input.GetAxis("Dash") > 0 || Input.GetButtonDown("Dash");
+            isDashing = Input.GetAxis("Dash") > 0 || Input.GetButton("Dash");
             startedDashing = !wasDashing && isDashing;
             stoppedDashing = wasJumping && !isDashing;
 
-            attack = Input.GetButtonDown("Fire1");
-            isAttacking = Input.GetButton("Fire1");
+            attack = Input.GetButtonDown("Attack");
+            isAttacking = Input.GetButton("Attack");
             startedAttacking = !wasAttacking && isAttacking;
             stoppedAttacking = wasAttacking && !isAttacking;
 
-            shoot = Input.GetButtonDown("Fire2");
-            isShooting = Input.GetButton("Fire2");
+            shoot = Input.GetButtonDown("Shoot");
+            isShooting = Input.GetButton("Shoot");
             startedShooting = !wasShooting && isShooting;
             stoppedShooting = wasShooting && !isShooting;
         }
