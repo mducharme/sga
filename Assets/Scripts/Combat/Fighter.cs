@@ -103,7 +103,7 @@ namespace Combat
 
         public Attack GetAttack(CombatType type = CombatType.Base)
         {
-            Attack attack = new(type);
+            Attack attack = new(type, this);
             attack.AddModifiers(coreAttributes.attacks);
             attack.AddModifiers(transientAttributes.attacks);
             return attack;
@@ -111,7 +111,7 @@ namespace Combat
 
         public Defense GetDefense(CombatType type = CombatType.Base)
         {
-            Defense defense = new(type);
+            Defense defense = new(type, this);
             defense.AddModifiers(coreAttributes.defenses);
             defense.AddModifiers(transientAttributes.defenses);
             return defense;
