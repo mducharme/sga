@@ -10,6 +10,8 @@ namespace Combat
 
         [SerializeField] private Weapon.RangedController rangedWeapon;
 
+        [SerializeField] private Weapon.ShieldController shield;
+
         [SerializeField] Attributes coreAttributes;
         [SerializeField] Attributes transientAttributes;
         private readonly Attributes mergedAttributes = new();
@@ -31,6 +33,7 @@ namespace Combat
                 rangedWeapon.Attacker = this;
             }
         }
+        public Weapon.ShieldController Shield { get => shield; set { shield = value; } }
         public Attributes Attributes { get => mergedAttributes; private set { } }
 
         public delegate void OnHitByAttack(Result result);

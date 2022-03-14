@@ -31,6 +31,11 @@ namespace Player
         [SerializeField] private bool startedShooting;
         [SerializeField] private bool stoppedShooting;
 
+        [SerializeField] private bool shield;
+        [SerializeField] private bool isShielding;
+        [SerializeField] private bool startedShielding;
+        [SerializeField] private bool stoppedShielding;
+
         public float Horizontal { get => horizontal; private set { } }
         public float Vertical { get => vertical; private set { } }
         public bool IsMoving { get => isMoving; private set { } }
@@ -57,12 +62,18 @@ namespace Player
         public bool StartedShooting { get => startedShooting; private set { } }
         public bool StoppedShooting { get => stoppedShooting; private set { } }
 
+        public bool Shield { get => shield; private set { } }
+        public bool IsShielding { get => isShielding; private set { } }
+        public bool StartedShielding { get => startedShielding; private set { } }
+        public bool StoppedShielding { get => stoppedShielding; private set { } }
+
         public void HandleInput()
         {
             bool wasJumping = isJumping;
             bool wasDashing = isDashing;
             bool wasAttacking = isAttacking;
             bool wasShooting = isShooting;
+            bool wasShielding = isShielding;
 
             horizontal = Input.GetAxisRaw("Horizontal");
             vertical = Input.GetAxisRaw("Vertical");
@@ -89,6 +100,11 @@ namespace Player
             isShooting = Input.GetButton("Shoot");
             startedShooting = !wasShooting && isShooting;
             stoppedShooting = wasShooting && !isShooting;
+
+            shield = Input.GetButtonDown("Shield");
+            isShielding = Input.GetButton("Shield");
+            startedShielding = !wasShielding && isShielding;
+            stoppedShielding = wasShielding && !isShielding;
         }
     }
 }
