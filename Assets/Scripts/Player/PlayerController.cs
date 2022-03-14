@@ -143,6 +143,15 @@ namespace Player
             {
                 fighter.RangedWeapon.Shoot();
             }
+
+            if(controls.StartedShielding && fighter.Shield != null)
+            {
+                fighter.Shield.StartShield();
+            }
+            if (controls.StoppedShielding && fighter.Shield != null)
+            {
+                fighter.Shield.StopShield();
+            }
         }
 
         private void FixedUpdate()

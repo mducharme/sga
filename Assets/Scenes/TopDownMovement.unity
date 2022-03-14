@@ -343,7 +343,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
-  m_LocalRotation: {x: 0.54138577, y: 0.00000002893337, z: -0.000000018630583, w: 0.8407743}
+  m_LocalRotation: {x: 0.54138577, y: -0.00000002893337, z: 0.000000018630583, w: 0.8407743}
   m_LocalPosition: {x: 0, y: 23, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -595,7 +595,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 508997809}
-  m_LocalRotation: {x: 0.54138577, y: 0.00000002893337, z: -0.000000018630583, w: 0.8407743}
+  m_LocalRotation: {x: 0.54138577, y: -0.00000002893337, z: 0.000000018630583, w: 0.8407743}
   m_LocalPosition: {x: 0, y: 23, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -834,6 +834,7 @@ MonoBehaviour:
     currentHealth: 20
   meleeWeapon: {fileID: 0}
   rangedWeapon: {fileID: 0}
+  shield: {fileID: 0}
   coreAttributes:
     moveSpeed: 0
     jumpForce: 0
@@ -958,7 +959,7 @@ PrefabInstance:
     - target: {fileID: 8779335695959605680, guid: c887251a0c53f4fd48c21b1a5f7ebf6c,
         type: 3}
       propertyPath: dashCooldown
-      value: 0.2
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 8779335695959605682, guid: c887251a0c53f4fd48c21b1a5f7ebf6c,
         type: 3}
@@ -1295,9 +1296,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_BindingMode: 4
   m_FollowOffset: {x: 0, y: 22, z: -10}
-  m_XDamping: 1
-  m_YDamping: 1
-  m_ZDamping: 1
+  m_XDamping: 0.3
+  m_YDamping: 0.3
+  m_ZDamping: 0.3
   m_AngularDampingMode: 0
   m_PitchDamping: 0
   m_YawDamping: 0
@@ -1316,17 +1317,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_TrackedObjectOffset: {x: 0, y: 0, z: 0}
-  m_LookaheadTime: 0.12
-  m_LookaheadSmoothing: 0.12
-  m_LookaheadIgnoreY: 0
-  m_HorizontalDamping: 0.5
-  m_VerticalDamping: 0.5
+  m_LookaheadTime: 0.2
+  m_LookaheadSmoothing: 2
+  m_LookaheadIgnoreY: 1
+  m_HorizontalDamping: 0
+  m_VerticalDamping: 0
   m_ScreenX: 0.5
   m_ScreenY: 0.5
-  m_DeadZoneWidth: 0.3
-  m_DeadZoneHeight: 0.3
-  m_SoftZoneWidth: 0.8
-  m_SoftZoneHeight: 0.8
+  m_DeadZoneWidth: 0.4
+  m_DeadZoneHeight: 0.5
+  m_SoftZoneWidth: 0.99
+  m_SoftZoneHeight: 0.98
   m_BiasX: 0
   m_BiasY: 0
   m_CenterOnActivate: 1
